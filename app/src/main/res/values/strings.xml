@@ -3,4 +3,9 @@
     <string name="titleText">Mitchell\'s Math Mania</string>
     <string name="playButton">Play</string>
     <string name="statsButton">Stats</string>
+    <string name="additionButton">+</string>
+    <string name="multiplicationButton">×</string>
+    <string name="subtractionButton">-</string>
+    <string name="divisionButton">÷</string>
+    <string name="defaultOutput">Select at least one of the operators below</string>
 </resources>
