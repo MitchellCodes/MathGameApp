@@ -63,14 +63,6 @@ public class StatisticsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
 
-        Button btnStatsToHome = view.findViewById(R.id.btnStatsToHome);
-        btnStatsToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.navigate_statisticsFragment_to_homeFragment);
-            }
-        });
-
         return view;
     }
 }

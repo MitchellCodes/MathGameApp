@@ -63,14 +63,6 @@ public class GameFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
-        Button btnGameToHome = view.findViewById(R.id.btnGameToHome);
-        btnGameToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.navigate_gameFragment_to_homeFragment);
-            }
-        });
-
         return view;
     }
 }

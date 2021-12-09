@@ -21,18 +21,10 @@
         android:id="@+id/gameFragment"
         android:name="com.example.mathgameapp.GameFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_game" >
-        <action
-            android:id="@+id/navigate_gameFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_game" />
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.mathgameapp.StatisticsFragment"
         android:label="fragment_statistics"
-        tools:layout="@layout/fragment_statistics" >
-        <action
-            android:id="@+id/navigate_statisticsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_statistics" />
 </navigation>
