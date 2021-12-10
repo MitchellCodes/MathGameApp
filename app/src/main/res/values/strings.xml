@@ -4,9 +4,9 @@
     <string name="playButton">Play</string>
     <string name="statsButton">Stats</string>
     <string name="additionButton">+</string>
-    <string name="multiplicationButton">×</string>
+    <string name="multiplicationButton">*</string>
     <string name="subtractionButton">-</string>
-    <string name="divisionButton">÷</string>
+    <string name="divisionButton">/</string>
     <string name="defaultOutput">Select at least one operator</string>
     <string name="instructionText">Solve the equation</string>
     <string name="submitButton">Submit Answer</string>
