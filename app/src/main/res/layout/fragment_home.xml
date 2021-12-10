@@ -49,62 +49,95 @@
         app:layout_constraintVertical_bias="0.979" />
 
     <Button
-        android:id="@+id/btnMultiplication"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/multiplicationButton"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAddition"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnAddition"
-        app:layout_constraintTop_toTopOf="@+id/btnAddition"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
         android:id="@+id/btnAddition"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/additionButton"
-        app:layout_constraintBottom_toTopOf="@+id/btnSubtraction"
-        app:layout_constraintEnd_toStartOf="@+id/btnMultiplication"
+        app:layout_constraintEnd_toStartOf="@+id/btnSubtraction"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtOutput"
+        tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/btnSubtraction"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnMultiplication"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/subtractionButton"
-        app:layout_constraintBottom_toTopOf="@+id/btnHomeToGame"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/multiplicationButton"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSubtraction"
         app:layout_constraintEnd_toStartOf="@+id/btnDivision"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btnSubtraction"
+        app:layout_constraintTop_toTopOf="@+id/btnSubtraction" />
 
     <Button
         android:id="@+id/btnDivision"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/divisionButton"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSubtraction"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMultiplication"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnSubtraction"
-        app:layout_constraintTop_toTopOf="@+id/btnSubtraction"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/btnMultiplication"
+        app:layout_constraintTop_toTopOf="@+id/btnMultiplication" />
+
+    <Button
+        android:id="@+id/btnSubtraction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/subtractionButton"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAddition"
+        app:layout_constraintEnd_toStartOf="@+id/btnMultiplication"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnAddition"
+        app:layout_constraintTop_toTopOf="@+id/btnAddition"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/txtOutput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/defaultOutput"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHomeTitle"
-        app:layout_constraintVertical_bias="0.879" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHomeTitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnHomeToGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSelectedOperators"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtSelectedOperators"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/operatorsSelected"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSubtraction" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,8 +7,9 @@
     <string name="multiplicationButton">×</string>
     <string name="subtractionButton">-</string>
     <string name="divisionButton">÷</string>
-    <string name="defaultOutput">Select at least one of the operators below</string>
+    <string name="defaultOutput">Select at least one operator</string>
     <string name="instructionText">Solve the equation</string>
     <string name="submitButton">Submit Answer</string>
     <string name="answerHint">Answer</string>
+    <string name="operatorsSelected">Operators you have selected</string>
 </resources>
