@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -36,9 +37,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String[] operators = getSelectedOperators().toArray(new String[0]);
-                HomeFragmentDirections.ActionHomeFragmentToGameFragment action =
-                        HomeFragmentDirections.actionHomeFragmentToGameFragment(operators);
-                Navigation.findNavController(view).navigate(action);
+                if (operators.length > 0) {
+                    HomeFragmentDirections.ActionHomeFragmentToGameFragment action =
+                            HomeFragmentDirections.actionHomeFragmentToGameFragment(operators);
+                    Navigation.findNavController(view).navigate(action);
+                }
+                else {
+                    Toast.makeText(getActivity(), "Please select at least one operator", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
