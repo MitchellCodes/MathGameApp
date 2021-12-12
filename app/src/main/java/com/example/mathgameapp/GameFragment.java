@@ -16,10 +16,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class GameFragment extends Fragment {
+    private final Random rand = new Random();
+
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String CORRECT_ANSWERS_KEY = "correctAnswers";
     public static final int CORRECT_ANSWERS_KEY_DEFAULT_VALUE = 0;
@@ -47,7 +51,38 @@ public class GameFragment extends Fragment {
         return view;
     }
 
-    public void hideTextViewsAtStart(View view) {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        GameFragmentArgs args = GameFragmentArgs.fromBundle(getArguments());
+        String[] operators = args.getOperators();
+        String firstEquation = generateEquation(operators);
+
+        TextView equationOutput = view.findViewById(R.id.txtEquationOutput);
+        equationOutput.setText(firstEquation);
+    }
+
+    private String generateEquation(String[] operatorsToUse) {
+        String operator = operatorsToUse[rand.nextInt(operatorsToUse.length)];
+        int firstNumber = 0;
+        int secondNumber = 0;
+
+        if (operator.equals("+") || operator.equals("-")) {
+            firstNumber = rand.nextInt(144) + 1;
+            secondNumber = rand.nextInt(144) + 1;
+        }
+        else if (operator.equals("*")) {
+            firstNumber = rand.nextInt(12) + 1;
+            secondNumber = rand.nextInt(12) + 1;
+        }
+        else {
+            firstNumber = rand.nextInt(144) + 1;
+            secondNumber = rand.nextInt(12) + 1;
+        }
+
+        return firstNumber + " " + operator + " " + secondNumber;
+    }
+
+    private void hideTextViewsAtStart(View view) {
         TextView previousEquationTitle = view.findViewById(R.id.txtPreviousEquationTitle);
         TextView previousEquationDisplay = view.findViewById(R.id.txtPreviousEquation);
 
@@ -55,18 +90,7 @@ public class GameFragment extends Fragment {
         previousEquationDisplay.setVisibility(View.INVISIBLE);
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        GameFragmentArgs args = GameFragmentArgs.fromBundle(getArguments());
-        String[] operators = args.getOperators();
-        String operatorsToUse = "";
-
-        for (String operator : operators) {
-            operatorsToUse += operator;
-        }
-    }
-
-    public void updateCorrectAnswers() {
+    private void updateCorrectAnswers() {
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
         int startingValue =
@@ -79,7 +103,7 @@ public class GameFragment extends Fragment {
         Toast.makeText(getActivity(), "Your answer was correct", Toast.LENGTH_SHORT).show();
     }
 
-    public void updateIncorrectAnswers() {
+    private void updateIncorrectAnswers() {
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
 
         int startingValue =
