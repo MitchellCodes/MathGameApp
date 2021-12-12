@@ -65,6 +65,9 @@ public class GameFragment extends Fragment {
 
         TextView equationOutput = getView().findViewById(R.id.txtEquationOutput);
         equationOutput.setText(equationAsString(numbersForEquation, operatorForEquation));
+
+        int correctAnswer = calculateCorrectAnswer(numbersForEquation, operatorForEquation);
+        Toast.makeText(getActivity(), "" + correctAnswer, Toast.LENGTH_SHORT).show();
     }
 
     private String pickRandomOperator(String[] operatorsToUse) {
@@ -93,6 +96,20 @@ public class GameFragment extends Fragment {
 
     private String equationAsString(int[] numbers, String operator) {
         return numbers[0] + " " + operator + " " + numbers[1];
+    }
+
+    private int calculateCorrectAnswer(int[] numbers, String operator) {
+        switch (operator) {
+            case "+":
+                return numbers[0] + numbers[1];
+            case "-":
+                return numbers[0] - numbers[1];
+            case "*":
+                return numbers[0] * numbers[1];
+            case "/":
+                return numbers[0] / numbers[1];
+        }
+        throw new IllegalArgumentException("Operator was not +, -, *, or /");
     }
 
     private void hideTextViewsAtStart(View view) {
