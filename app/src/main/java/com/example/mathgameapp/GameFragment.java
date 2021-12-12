@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,7 @@ import java.util.Random;
  */
 public class GameFragment extends Fragment {
     private final Random rand = new Random();
+    private String[] operatorsFromHome;
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String CORRECT_ANSWERS_KEY = "correctAnswers";
@@ -44,7 +44,7 @@ public class GameFragment extends Fragment {
         submitAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //updateCorrectAnswers();
+                generateAndShowEquation();
             }
         });
 
@@ -54,15 +54,24 @@ public class GameFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         GameFragmentArgs args = GameFragmentArgs.fromBundle(getArguments());
-        String[] operators = args.getOperators();
-        String firstEquation = generateEquation(operators);
+        operatorsFromHome = args.getOperators();
 
-        TextView equationOutput = view.findViewById(R.id.txtEquationOutput);
-        equationOutput.setText(firstEquation);
+        generateAndShowEquation();
     }
 
-    private String generateEquation(String[] operatorsToUse) {
-        String operator = operatorsToUse[rand.nextInt(operatorsToUse.length)];
+    private void generateAndShowEquation() {
+        String operatorForEquation = pickRandomOperator(operatorsFromHome);
+        int[] numbersForEquation = generateNumbers(operatorForEquation);
+
+        TextView equationOutput = getView().findViewById(R.id.txtEquationOutput);
+        equationOutput.setText(equationAsString(numbersForEquation, operatorForEquation));
+    }
+
+    private String pickRandomOperator(String[] operatorsToUse) {
+        return operatorsToUse[rand.nextInt(operatorsToUse.length)];
+    }
+
+    private int[] generateNumbers(String operator) {
         int firstNumber = 0;
         int secondNumber = 0;
 
@@ -79,7 +88,11 @@ public class GameFragment extends Fragment {
             secondNumber = rand.nextInt(12) + 1;
         }
 
-        return firstNumber + " " + operator + " " + secondNumber;
+        return new int[] {firstNumber, secondNumber};
+    }
+
+    private String equationAsString(int[] numbers, String operator) {
+        return numbers[0] + " " + operator + " " + numbers[1];
     }
 
     private void hideTextViewsAtStart(View view) {
