@@ -65,7 +65,7 @@ public class GameFragment extends Fragment {
             compareInputToAnswer(Integer.parseInt(userInput));
         }
         else {
-            Toast.makeText(getActivity(), "Input was not a number", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Input was not an integer", Toast.LENGTH_SHORT).show();
         }
     }
 
