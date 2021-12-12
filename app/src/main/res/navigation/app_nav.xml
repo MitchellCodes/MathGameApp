@@ -11,17 +11,21 @@
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/navigate_homeFragment_to_gameFragment"
+            android:id="@+id/action_homeFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
         <action
-            android:id="@+id/navigate_homeFragment_to_statisticsFragment"
+            android:id="@+id/action_homeFragment_to_statisticsFragment"
             app:destination="@id/statisticsFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.example.mathgameapp.GameFragment"
         android:label="Solve the equation"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game" >
+        <argument
+            android:name="operators"
+            app:argType="string[]" />
+    </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.mathgameapp.StatisticsFragment"
