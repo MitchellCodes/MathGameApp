@@ -15,7 +15,6 @@ import android.widget.TextView;
  * A simple {@link Fragment} subclass.
  */
 public class StatisticsFragment extends Fragment {
-    public static final String SHARED_PREFS = "sharedPrefs";
     public static final String CORRECT_ANSWERS_KEY = "correctAnswers";
     public static final int CORRECT_ANSWERS_KEY_DEFAULT_VALUE = 0;
     public static final String INCORRECT_ANSWERS_KEY = "incorrectAnswers";
@@ -29,9 +28,13 @@ public class StatisticsFragment extends Fragment {
 
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         int correctAnswerCount = sharedPreferences.getInt(CORRECT_ANSWERS_KEY, CORRECT_ANSWERS_KEY_DEFAULT_VALUE);
+        int incorrectAnswerCount = sharedPreferences.getInt(INCORRECT_ANSWERS_KEY, INCORRECT_ANSWERS_KEY_DEFAULT_VALUE);
 
-        TextView textView = view.findViewById(R.id.txtTesting);
-        textView.setText("" + correctAnswerCount);
+        TextView correctAnswers = view.findViewById(R.id.txtCorrectAnswerDisplay);
+        TextView incorrectAnswers = view.findViewById(R.id.txtIncorrectAnswerDisplay);
+
+        correctAnswers.setText("" + correctAnswerCount);
+        incorrectAnswers.setText("" + incorrectAnswerCount);
 
         return view;
     }

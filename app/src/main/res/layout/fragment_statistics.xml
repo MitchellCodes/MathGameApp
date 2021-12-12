@@ -7,13 +7,54 @@
     tools:context=".StatisticsFragment">
 
     <TextView
-        android:id="@+id/txtTesting"
+        android:id="@+id/txtIncorrectAnswerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is the stats fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/incorrectAnswers"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtCorrectAnswerTitle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txtCorrectAnswerTitle"
+        app:layout_constraintTop_toTopOf="@+id/txtCorrectAnswerTitle" />
+
+    <TextView
+        android:id="@+id/txtIncorrectAnswerDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/incorrect_red"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtIncorrectAnswerTitle"
+        app:layout_constraintStart_toStartOf="@+id/txtIncorrectAnswerTitle"
+        app:layout_constraintTop_toBottomOf="@+id/txtIncorrectAnswerTitle"
+        tools:text="incorrect answers" />
+
+    <TextView
+        android:id="@+id/txtCorrectAnswerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/correctAnswers"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtIncorrectAnswerTitle"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.244" />
+
+    <TextView
+        android:id="@+id/txtCorrectAnswerDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/correct_green"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtCorrectAnswerTitle"
+        app:layout_constraintStart_toStartOf="@+id/txtCorrectAnswerTitle"
+        app:layout_constraintTop_toBottomOf="@+id/txtCorrectAnswerTitle"
+        tools:text="correct answers" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

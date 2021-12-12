@@ -14,4 +14,6 @@
     <string name="operatorsSelected">Operators you have selected</string>
     <string name="previousEquationTitle">The previous equation</string>
     <string name="divisionNote">Round quotients down to the nearest whole number</string>
+    <string name="correctAnswers">Correct Answers</string>
+    <string name="incorrectAnswers">Incorrect Answers</string>
 </resources>
