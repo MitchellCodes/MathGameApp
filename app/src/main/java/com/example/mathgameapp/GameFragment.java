@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +22,8 @@ import java.util.Random;
 public class GameFragment extends Fragment {
     private final Random rand = new Random();
     private String[] operatorsFromHome;
+    private int equationSolution;
 
-    public static final String SHARED_PREFS = "sharedPrefs";
     public static final String CORRECT_ANSWERS_KEY = "correctAnswers";
     public static final int CORRECT_ANSWERS_KEY_DEFAULT_VALUE = 0;
     public static final String INCORRECT_ANSWERS_KEY = "incorrectAnswers";
@@ -36,15 +35,13 @@ public class GameFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         Button submitAnswerButton = view.findViewById(R.id.btnSubmitAnswer);
-        EditText answerEditText = view.findViewById(R.id.txtAnswer);
-        TextView equationDisplay = view.findViewById(R.id.txtEquationOutput);
 
         hideTextViewsAtStart(view);
 
         submitAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                generateAndShowEquation();
+                processInput();
             }
         });
 
@@ -56,18 +53,64 @@ public class GameFragment extends Fragment {
         GameFragmentArgs args = GameFragmentArgs.fromBundle(getArguments());
         operatorsFromHome = args.getOperators();
 
-        generateAndShowEquation();
+        equationSolution = generateAndShowEquation();
     }
 
-    private void generateAndShowEquation() {
+    private void processInput() {
+        TextView answerInput = getView().findViewById(R.id.txtAnswer);
+        String userInput = answerInput.getText().toString();
+        boolean isInputValid = parseInput(userInput);
+
+        if (isInputValid) {
+            compareInputToAnswer(Integer.parseInt(userInput));
+        }
+        else {
+            Toast.makeText(getActivity(), "Input was not a number", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void compareInputToAnswer(int userAnswer) {
+        if (userAnswer == equationSolution) {
+            updateCorrectAnswers();
+        }
+        else {
+            updateIncorrectAnswers();
+        }
+
+        moveEquationToPrevious();
+        showHiddenTextViews();
+        equationSolution = generateAndShowEquation();
+    }
+
+    private boolean parseInput(String inputToParse) {
+        try {
+            Integer.parseInt(inputToParse);
+            return true;
+        }
+        catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    private void moveEquationToPrevious() {
+        TextView equationOutput = getView().findViewById(R.id.txtEquationOutput);
+        TextView previousEquation = getView().findViewById(R.id.txtPreviousEquation);
+
+        String equationWithSolution = equationOutput.getText().toString();
+        equationWithSolution = equationWithSolution.substring(0, equationWithSolution.length() - 1);
+        equationWithSolution += equationSolution;
+        previousEquation.setText(equationWithSolution);
+    }
+
+    private int generateAndShowEquation() {
         String operatorForEquation = pickRandomOperator(operatorsFromHome);
         int[] numbersForEquation = generateNumbers(operatorForEquation);
 
         TextView equationOutput = getView().findViewById(R.id.txtEquationOutput);
-        equationOutput.setText(equationAsString(numbersForEquation, operatorForEquation));
+        String output = equationAsString(numbersForEquation, operatorForEquation) + " = x";
+        equationOutput.setText(output);
 
-        int correctAnswer = calculateCorrectAnswer(numbersForEquation, operatorForEquation);
-        Toast.makeText(getActivity(), "" + correctAnswer, Toast.LENGTH_SHORT).show();
+        return calculateEquationSolution(numbersForEquation, operatorForEquation);
     }
 
     private String pickRandomOperator(String[] operatorsToUse) {
@@ -98,7 +141,7 @@ public class GameFragment extends Fragment {
         return numbers[0] + " " + operator + " " + numbers[1];
     }
 
-    private int calculateCorrectAnswer(int[] numbers, String operator) {
+    private int calculateEquationSolution(int[] numbers, String operator) {
         switch (operator) {
             case "+":
                 return numbers[0] + numbers[1];
@@ -118,6 +161,14 @@ public class GameFragment extends Fragment {
 
         previousEquationTitle.setVisibility(View.INVISIBLE);
         previousEquationDisplay.setVisibility(View.INVISIBLE);
+    }
+
+    private void showHiddenTextViews() {
+        TextView previousEquationTitle = getView().findViewById(R.id.txtPreviousEquationTitle);
+        TextView previousEquationDisplay = getView().findViewById(R.id.txtPreviousEquation);
+
+        previousEquationTitle.setVisibility(View.VISIBLE);
+        previousEquationDisplay.setVisibility(View.VISIBLE);
     }
 
     private void updateCorrectAnswers() {
