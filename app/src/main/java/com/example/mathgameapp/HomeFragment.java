@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ToggleButton;
 
-import java.util.Set;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,30 +35,34 @@ public class HomeFragment extends Fragment {
         btnHomeToGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.navigate_homeFragment_to_gameFragment);
+                String[] operators = getSelectedOperators().toArray(new String[0]);
+                HomeFragmentDirections.ActionHomeFragmentToGameFragment action =
+                        HomeFragmentDirections.actionHomeFragmentToGameFragment(operators);
+                Navigation.findNavController(view).navigate(action);
             }
         });
     }
 
-    private Set<String> getSelectedOperators (View view) {
-        Set<String> operators = null;
-        ToggleButton[] buttons = getOperatorButtons(view);
+    private ArrayList<String> getSelectedOperators () {
+        ToggleButton[] buttons = getOperatorButtons();
+        ArrayList<String> selectedOperators = new ArrayList<>();
 
         for (ToggleButton currentButton : buttons) {
             if (currentButton.isChecked()) {
-                operators.add(currentButton.getText().toString());
+                selectedOperators.add(currentButton.getText().toString());
             }
         }
 
-        return operators;
+        return selectedOperators;
     }
 
-    private ToggleButton[] getOperatorButtons(View view) {
-        return new ToggleButton[] {
-                view.findViewById(R.id.btnAddition),
-                view.findViewById(R.id.btnSubtraction),
-                view.findViewById(R.id.btnMultiplication),
-                view.findViewById(R.id.btnDivision)
+    private ToggleButton[] getOperatorButtons() {
+
+        return new ToggleButton[]{
+                getView().findViewById(R.id.btnAddition),
+                getView().findViewById(R.id.btnSubtraction),
+                getView().findViewById(R.id.btnMultiplication),
+                getView().findViewById(R.id.btnDivision)
         };
     }
 
@@ -67,7 +71,7 @@ public class HomeFragment extends Fragment {
         btnHomeToStats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.navigate_homeFragment_to_statisticsFragment);
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_statisticsFragment);
             }
         });
     }
