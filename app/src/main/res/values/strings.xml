@@ -13,4 +13,5 @@
     <string name="answerHint">Answer</string>
     <string name="operatorsSelected">Operators you have selected</string>
     <string name="previousEquationTitle">The previous equation</string>
+    <string name="divisionNote">Round quotients down to the nearest whole number</string>
 </resources>

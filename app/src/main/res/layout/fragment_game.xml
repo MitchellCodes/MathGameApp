@@ -53,7 +53,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEquationOutput"
+        app:layout_constraintTop_toBottomOf="@+id/txtDivisionNote"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -77,4 +77,16 @@
         app:layout_constraintBottom_toTopOf="@+id/txtPreviousEquation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtDivisionNote"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/divisionNote"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEquationOutput" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
