@@ -40,7 +40,7 @@ public class GameFragment extends Fragment {
         submitAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateCorrectAnswers();
+                //updateCorrectAnswers();
             }
         });
 
@@ -64,9 +64,6 @@ public class GameFragment extends Fragment {
         for (String operator : operators) {
             operatorsToUse += operator;
         }
-
-        TextView textView1 = view.findViewById(R.id.txtEquationOutput);
-        textView1.setText(operatorsToUse);
     }
 
     public void updateCorrectAnswers() {
@@ -79,6 +76,19 @@ public class GameFragment extends Fragment {
         editor.putInt(CORRECT_ANSWERS_KEY, startingValue + 1);
         editor.apply();
 
-        Toast.makeText(getActivity(), "You clicked the submit button", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Your answer was correct", Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateIncorrectAnswers() {
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+
+        int startingValue =
+                sharedPreferences.getInt(INCORRECT_ANSWERS_KEY, INCORRECT_ANSWERS_KEY_DEFAULT_VALUE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(INCORRECT_ANSWERS_KEY, startingValue + 1);
+        editor.apply();
+
+        Toast.makeText(getActivity(), "Your answer was wrong", Toast.LENGTH_SHORT).show();
     }
 }
